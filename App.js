@@ -1,7 +1,12 @@
 import React from 'react';
+
+// Redux
+import { Provider } from 'react-redux';
+
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import store from './store/store';
 
 export default class App extends React.Component {
   state = {
@@ -12,19 +17,21 @@ export default class App extends React.Component {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      );
-    }
+            startAsync={this._loadResourcesAsync}
+            onError={this._handleLoadingError}
+            onFinish={this._handleFinishLoading}
+          />
+        );
+      } else {
+        return (
+          <Provider store={store}>
+            <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+          </Provider>
+        );
+      }
   }
 
   _loadResourcesAsync = async () => {
