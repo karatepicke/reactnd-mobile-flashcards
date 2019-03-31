@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AddDecksScreen from '../screens/AddDecksScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -39,11 +40,15 @@ HomeStack.navigationOptions = {
 //   ),
 // };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+// const SettingsStack = createStackNavigator({
+//   Settings: SettingsScreen,
+// });
+
+const DecksStack = createStackNavigator({
+  AddDecks: AddDecksScreen,
 });
 
-SettingsStack.navigationOptions = {
+DecksStack.navigationOptions = {
   tabBarLabel: 'Add Decks',
   tabBarIcon: ({ focused }) => (
     <FontAwesome
@@ -59,5 +64,5 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   // LinksStack,
-  SettingsStack,
+  DecksStack,
 });
