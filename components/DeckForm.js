@@ -2,12 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // UI
-import { View, TextInput, Button, Alert } from 'react-native';
+import { View, TextInput, Text, Alert } from 'react-native';
+import { Container, Card, Form, Input, Button } from 'native-base';
 
 // Actions
 import { addNewDeck } from '../store/actions/Deck';
 
 class DeckForm extends React.Component {
+  componentWillUnmount() {
+    this.isCancelled = true;
+  }
+
   state = {
     title: ''
   }
@@ -17,9 +22,9 @@ class DeckForm extends React.Component {
     if (this.state.title.length === 0) {
       console.log('ALERT')
     } else {
-      const { title } = this.state
+      const title = this.state
 
-      this.props.addNewDeck(payload)
+      this.props.dispatch(addNewDeck(title))
       // this.props.navigate('QuizOverview', { title })
     }
   } 
@@ -27,17 +32,24 @@ class DeckForm extends React.Component {
   render() {
     return(
       <View>
-        <TextInput
-          onChangeText={title => this.setState({title})}
-          fieldLabel='Deck-Title'
-          placeholder='I.e. "My nifty biology-deck"'
-          maxLength={50}
-        />
-        <Button title='Submit title' onPress={() => this.handleButtonPress(this.state)} />
+        <Container>
+          <Card>
+            <Form>
+              <TextInput
+                onChangeText={title => !this.isCancelled && this.setState({title})}
+                fieldLabel='Deck-Title'
+                placeholder='I.e. "My nifty biology-deck"'
+                maxLength={50}
+              />
+              <Button onPress={() => this.handleButtonPress(this.state)}>
+                <Text>Submit Title</Text>
+              </Button>
+            </Form>
+          </Card>
+        </Container>
       </View>
     )
   }
-  
 }
 
 const mapStateToProps = ({ Deck }) => ({
