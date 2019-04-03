@@ -1,39 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+
+// Navigation
+import { createStackNavigator } from 'react-navigation';
 
 // Actions
 import { _getInitialDeckData } from '../data/_DATA';
 
 // UI
-import { Alert, FlatList, View, Text } from 'react-native';
-
-// Custom Components
-import WelcomeText from '../components/WelcomeText';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Card } from 'native-base';
 
 class HomeView extends React.Component {
   state = {
     loaded: false,
   }
 
-  render() {
-    console.log('>>>>>>>>>>>', state, '<<<<<<<<<<<')
+  // Event Listeners
+  handleCardPress(deckId) {
+    this.props.navigation.navigate('SingleDeck', { deckId })
+  }
 
-    const decksPanels = this.props.decks.decks.map((deck) => {
+  render() {
+    if (!this.props.decks) {
+      return null
+    }
+    const decksPanels = this.props.decks.map((deck) => {
       return (
-        <View>
-          <Card>
-            <Text>{deck.title}</Text>
-          </Card>
+        <View key={deck.id}>
+          <TouchableOpacity onPress={this.handleCardPress.bind(this, deck.id)}>
+            <Card>
+              <Text>{deck.title}</Text>
+              <Text>{deck.questions.length} Questions</Text>
+            </Card>
+          </TouchableOpacity>
         </View>
       )
     })
+    return decksPanels
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    decks: state.decks,
-  }
-};
+const mapStateToProps = ({ decks }) => ({
+  decks: decks.decks,
+});
 export default connect(mapStateToProps)(HomeView);

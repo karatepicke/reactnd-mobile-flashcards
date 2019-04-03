@@ -1,32 +1,33 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 // Navigation
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import TabBarIcon from '../components/TabBarIcon';
 
-// Screens
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+// Views
 import AddDecksScreen from '../screens/AddDecksScreen';
 import HomeView from '../screens/HomeView';
+import SingleDeckView from '../screens/SingleDeckView';
 
-const HomeStack = createStackNavigator({
-  Home: HomeView,
+const NavStack = createStackNavigator({
+  Home: {
+    screen: HomeView
+  },
+  SingleDeck: {
+    screen: SingleDeckView
+  }
 });
 
-HomeStack.navigationOptions = {
+NavStack.navigationOptions = {
   tabBarLabel: 'Decks',
   tabBarIcon: ({ focused }) => (
-    <FontAwesome 
+    <FontAwesome
       focused={focused}
       size={28}
       name={
         `${focused ? 'vcard' : 'vcard-o'}`
-        }
-      />
+      }
+    />
   ),
 };
 
@@ -48,6 +49,6 @@ DecksStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
+  NavStack,
   DecksStack,
 });

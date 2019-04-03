@@ -1,10 +1,10 @@
 import { GET_ALL_DECKS, ADD_NEW_CARD, ADD_NEW_DECK } from '../actions/Deck';
 
 const initialState = {
-  decks: {
-    Animals: {
+  decks: [
+    {
+      id: 1,
       title: 'The Kakapo',
-      quizLength: 2,
       questions: [
         {
           question: 'Why is the New Zealand "Kakapo" close to extinction?',
@@ -16,9 +16,9 @@ const initialState = {
         }
       ]
     },
-    Sports: {
+    {
+      id: 2,
       title: "Germany's Football Record National Champion",
-      quizLength: 1,
       questions: [
         {
           question: "Which professional team holds the record for most national title-wins in Germany's Bundesliga?",
@@ -26,7 +26,7 @@ const initialState = {
         }
       ]
     }
-  }
+  ]
 }
 
 export default function decksReducer(state = initialState, action) {
