@@ -1,7 +1,12 @@
 // UUID
 import { v4 } from 'uuid';
 
-import { GET_ALL_DECKS, ADD_NEW_CARD, ADD_NEW_DECK } from '../actions/Deck';
+import {
+  GET_ALL_DECKS,
+  ADD_NEW_CARD,
+  ADD_NEW_DECK,
+  DESTROY_DECK
+} from '../actions/Deck';
 
 const initialState = {
   decks: [
@@ -62,6 +67,15 @@ export default function decksReducer(state = initialState, action) {
         decks: [
           action.payload.deck,
           ...state.decks
+        ]
+      };
+    case DESTROY_DECK:
+      const filteredDecks = state.decks.filter(deck => deck.id !== action.payload.deckId);
+
+      return {
+        ...state,
+        decks: [
+          ...filteredDecks
         ]
       };
     default:
