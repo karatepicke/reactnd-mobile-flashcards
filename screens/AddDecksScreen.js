@@ -26,7 +26,7 @@ export default class AddDecksScreen extends React.Component {
           <View style={styles.welcomeContainer}>
             <Text style={styles.h2}>What is the name of your new deck?</Text>
             <Text style={styles.h3}>Create a new deck and keep on learning... 💡</Text>
-            <DeckForm />
+            <DeckForm {...this.props} />
           </View>
         </ScrollView>
       </View>
