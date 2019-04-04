@@ -1,47 +1,75 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// UUID package
+import { v4 } from 'uuid';
+
 // UI
 import { View, TextInput, Text, Alert } from 'react-native';
-import { Container, Card, Form, Input, Button } from 'native-base';
+import { Container, Card, Form, Button } from 'native-base';
 
 // Actions
 import { addNewDeck } from '../store/actions/Deck';
 
 class DeckForm extends React.Component {
-  componentWillUnmount() {
-    this.isCancelled = true;
-  }
-
   state = {
-    title: ''
+    title: '',
+    category: ''
   }
 
   // Event handlers
-  handleButtonPress(payload) {
-    if (this.state.title.length === 0) {
-      console.log('ALERT')
+  handleButtonPress() {
+    if (!this.state.title || !this.state.category) {
+      Alert.alert(
+        'ALARM',
+        this.getAlertMsg(),
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ],
+        { cancelable: false },
+      );
     } else {
-      const title = this.state
-
-      this.props.dispatch(addNewDeck(title))
-      // this.props.navigate('QuizOverview', { title })
+      this.props.dispatch(addNewDeck({
+        id: v4(),
+        title: this.state.title,
+        category: this.state.category,
+        cards: []
+      }))
+      this.props.navigation.navigate('Home')
     }
-  } 
+  }
+
+  getAlertMsg() {
+    if (!this.state.title && this.state.category) {
+      return 'Please provide a title.'
+    }
+
+    if (!this.state.category && this.state.title) {
+      return 'Please provide a category.'
+    }
+
+    return 'Please provide a title and category.'
+  }
 
   render() {
-    return(
+    return (
       <View>
         <Container>
           <Card>
             <Form>
               <TextInput
-                onChangeText={title => !this.isCancelled && this.setState({title})}
+                onChangeText={title => this.setState({ title })}
                 fieldLabel='Deck-Title'
                 placeholder='I.e. "My nifty biology-deck"'
                 maxLength={50}
               />
-              <Button onPress={() => this.handleButtonPress(this.state)}>
+              <TextInput
+                onChangeText={category => this.setState({ category })}
+                fieldLabel='Deck-Category'
+                placeholder='I.e. "Biology"'
+                maxLength={50}
+              />
+              <Button onPress={() => this.handleButtonPress()}>
                 <Text>Submit Title</Text>
               </Button>
             </Form>
@@ -52,7 +80,4 @@ class DeckForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ Deck }) => ({
-  addNewDeck: Deck.addNewDeck,
-})
-export default connect(null, { addNewDeck })(DeckForm);
+export default connect()(DeckForm);
