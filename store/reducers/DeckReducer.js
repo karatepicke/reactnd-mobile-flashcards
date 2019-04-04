@@ -5,6 +5,7 @@ const initialState = {
     {
       id: 1,
       title: 'The Kakapo',
+      category: 'Animal Kingdom 🦍',
       questions: [
         {
           question: 'Why is the New Zealand "Kakapo" close to extinction?',
@@ -19,6 +20,7 @@ const initialState = {
     {
       id: 2,
       title: "Germany's Football Record National Champion",
+      category: 'Sports ⚽',
       questions: [
         {
           question: "Which professional team holds the record for most national title-wins in Germany's Bundesliga?",
