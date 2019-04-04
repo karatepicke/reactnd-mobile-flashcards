@@ -8,6 +8,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import AddDecksScreen from '../screens/AddDecksScreen';
 import HomeView from '../screens/HomeView';
 import SingleDeckView from '../screens/SingleDeckView';
+import AddNewCardView from '../screens/AddNewCardView';
 
 const NavStack = createStackNavigator({
   Home: {
@@ -15,6 +16,9 @@ const NavStack = createStackNavigator({
   },
   SingleDeck: {
     screen: SingleDeckView
+  },
+  AddNewCard: {
+    screen: AddNewCardView
   }
 });
 
