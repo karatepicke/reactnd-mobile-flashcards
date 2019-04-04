@@ -2,27 +2,27 @@ export const GET_ALL_DECKS = 'GET_ALL_DECKS'
 export const ADD_NEW_CARD = 'ADD_NEW_CARD'
 export const ADD_NEW_DECK = 'ADD_NEW_DECK'
 
-export function getDecks(payload) {
+export function getDecks() {
   return {
     type: GET_ALL_DECKS,
-    payload: {
-      decks
-    }
   }
 }
 
-export function addNewCard(payload) {
+export function addNewCard(deckId, card) {
   return {
     type: ADD_NEW_CARD,
     payload: {
-      decks
+      deckId,
+      card
     }
   }
 }
 
-export function addNewDeck(payload) {
+export function addNewDeck(deck) {
   return {
     type: ADD_NEW_DECK,
-    payload
+    payload: {
+      deck
+    }
   }
 }

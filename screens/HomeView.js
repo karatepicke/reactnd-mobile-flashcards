@@ -32,7 +32,7 @@ class HomeView extends React.Component {
             <Card>
               <Text>From the category {deck.category}</Text>
               <Text>{deck.title}</Text>
-              <Text>{deck.questions.length > 1 ? `${deck.questions.length} Cards` : '1 Card'}</Text>
+              <Text>{deck.cards.length > 1 ? `${deck.cards.length} Cards` : '1 Card'}</Text>
             </Card>
           </TouchableOpacity>
         </View>
