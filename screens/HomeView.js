@@ -31,7 +31,7 @@ class HomeView extends React.Component {
         <View key={deck.id}>
           <TouchableOpacity onPress={this.handleCardPress.bind(this, deck.id)}>
             <Card style={styles.deckCard}>
-              <Text style={styles.categoryText}>From the category {deck.category}</Text>
+              <Text style={styles.categoryText}>From the category "{deck.category}"</Text>
               <Text style={styles.deckTitle}>{deck.title}</Text>
               <Text>{deck.cards.length > 1 ? `${deck.cards.length} Cards` : '1 Card'}</Text>
             </Card>

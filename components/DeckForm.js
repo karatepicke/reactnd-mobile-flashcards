@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 
 // UI
-import { View, TextInput, Text, Alert } from 'react-native';
+import { View, TextInput, Text, Alert, StyleSheet } from 'react-native';
 import { Container, Card, Form, Button } from 'native-base';
 
 // Actions
@@ -55,25 +55,29 @@ class DeckForm extends React.Component {
     return (
       <View>
         <Container>
-          <Card>
-            <Form>
-              <TextInput
-                onChangeText={title => this.setState({ title })}
-                fieldLabel='Deck-Title'
-                placeholder='I.e. "My nifty biology-deck"'
-                maxLength={50}
-              />
-              <TextInput
-                onChangeText={category => this.setState({ category })}
-                fieldLabel='Deck-Category'
-                placeholder='I.e. "Biology"'
-                maxLength={50}
-              />
-              <Button onPress={() => this.handleButtonPress()}>
-                <Text>Submit Title</Text>
+          <Form>
+            <TextInput
+              onChangeText={title => this.setState({ title })}
+              fieldLabel='Deck-Title'
+              placeholder='I.e. "My nifty biology-deck"'
+              maxLength={50}
+              style={styles.textInput}
+            />
+            <TextInput
+              onChangeText={category => this.setState({ category })}
+              fieldLabel='Deck-Category'
+              placeholder='I.e. "Biology"'
+              maxLength={50}
+              style={styles.textInput}
+            />
+            <View style={styles.buttonWrapper}>
+              <Button
+                style={styles.addDeckButton}
+                onPress={this.handleButtonPress.bind(this)}>
+                <Text style={styles.addDeckButtonText}>Add Deck</Text>
               </Button>
-            </Form>
-          </Card>
+            </View>
+          </Form>
         </Container>
       </View>
     )
@@ -81,3 +85,31 @@ class DeckForm extends React.Component {
 }
 
 export default connect()(DeckForm);
+
+const styles = StyleSheet.create({
+  textInput: {
+    marginBottom: 10,
+    padding: 16,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    fontSize: 15,
+  },
+  buttonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  addDeckButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    width: 200,
+    backgroundColor: '#33c479',
+    textTransform: 'uppercase',
+  },
+  addDeckButtonText: {
+    textTransform: 'uppercase',
+  },
+});
+

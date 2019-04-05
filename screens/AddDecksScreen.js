@@ -1,4 +1,7 @@
 import React from 'react';
+import { WebBrowser } from 'expo';
+
+// UI
 import {
   Image,
   Platform,
@@ -8,84 +11,48 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { Card } from 'native-base';
 
 // Custom Components
 import DeckForm from '../components/DeckForm';
 
 
 export default class AddDecksScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   render() {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Text style={styles.h2}>What is the name of your new deck?</Text>
-            <Text style={styles.h3}>Create a new deck and keep on learning... 💡</Text>
+    return ( 
+      <View>
+        <Card style={styles.deckCard}>
+          <Text style={styles.title}>New Deck</Text>
+          <View>
+            <Text style={styles.subtitleOne}>What is the name of your new deck?</Text>
+            <Text style={styles.subtitleTwo}>Create a new deck and keep on learning... 💡</Text>
             <DeckForm {...this.props} />
           </View>
-        </ScrollView>
+        </Card>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  deckCard: {
+    minHeight: 250,
+    padding: 15,
+    backgroundColor: '#dee2e8',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
+  title: {
+    marginBottom: 10,
     textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  h2: {
-    marginTop: 10,
+    // textDecoration: 'underline',
     fontSize: 20,
-    color: 'rgba(96,100,109, 1)',
   },
-  h3: {
-    marginTop: 8,
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
+  subtitleOne: {
     textAlign: 'center',
+    fontSize: 16,
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  subtitleTwo: {
+    textAlign: 'center',
+    fontSize: 16,
+    marginBottom: 10,
   },
 });
