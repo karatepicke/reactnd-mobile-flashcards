@@ -10,41 +10,63 @@ import { Button } from 'native-base';
 import { Icon } from 'expo';
 
 class SingleDeckView extends React.Component {
-  // Event Listeners
-  handleAddCardPress(deckId) {
-    this.props.navigation.navigate('AddNewCard', { deckId })
+  state = {
+    deckId: undefined,
+    deck: undefined
   }
 
-  handleDeleteDeckPress(deckId) {
+  componentWillMount() {
+    const deckId = this.props.navigation.getParam('deckId')
+    const deck = this.props.decks.find((deck) => deck.id === deckId)
+
+    this.setState({ deckId, deck })
+  }
+
+  // Event Listeners
+  handleAddCardPress() {
+    this.props.navigation.navigate('AddNewCard', { deckId: this.state.deckId })
+  }
+
+  handleDeleteDeckPress() {
     // Destroy selected deck by deckId
-    this.props.dispatch(destroyDeck(deckId))
+    this.props.dispatch(destroyDeck(this.state.deckId))
 
     // Navigate back to HomeView
     this.props.navigation.navigate('Home')
   }
 
-  render() {
-    const deckId = this.props.navigation.getParam('deckId')
+  handleStartQuizPress() {
+    this.props.navigation.navigate('Quiz', { deckId: this.state.deckId })
+  }
 
+  render() {
+    if (!this.state.deckId || !this.state.deck) {
+      return null
+    }
     return (
       <View>
-        <Text>Deck {deckId}</Text>
+        <Text>Deck {this.state.deck.title}</Text>
         <Text>Placeholder</Text>
         <Icon.Entypo
-          onPress={this.handleDeleteDeckPress.bind(this, deckId)}
+          onPress={this.handleDeleteDeckPress.bind(this)}
           name='circle-with-cross'
           size={26}
           style={{ marginBottom: -3 }}
-        // color={this.props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
         />
         <Button
-          onPress={this.handleAddCardPress.bind(this, deckId)}>
+          onPress={this.handleAddCardPress.bind(this)}>
           <Text>Add a card</Text>
         </Button>
-        <Button><Text>Start Quiz</Text></Button >
+        <Button
+          onPress={this.handleStartQuizPress.bind(this)}>
+          <Text>Start Quiz</Text>
+        </Button>
       </View>
     )
   }
 }
 
-export default connect()(SingleDeckView);
+const mapStateToProps = ({ decks }) => ({
+  decks: decks.decks
+})
+export default connect(mapStateToProps)(SingleDeckView);

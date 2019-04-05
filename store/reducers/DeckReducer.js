@@ -16,23 +16,26 @@ const initialState = {
       category: 'Animal Kingdom 🦍',
       cards: [
         {
-          question: 'Why is the New Zealand "Kakapo" close to extinction?',
-          answer: 'Because it shows no natural flight response and relies solely on its green feathers to camouflage it. Unfortunately that does not help against predators that track its prey by scent.',
+          question: 'Is the New Zealand "Kakapo" close to extinction?',
+          isCorrect: true,
+          answer: 'Correct. Thats because it shows no natural flight response and relies solely on its green feathers to camouflage it. Unfortunately that does not help against predators that track its prey by scent.',
         },
         {
           question: 'Can we help?',
-          answer: 'Absolutely. For example by donating to the New Zealand Kakapo Recovery Fund.',
+          isCorrect: true,
+          answer: 'Correct. For example by donating to the New Zealand Kakapo Recovery Fund.',
         }
       ]
     },
     {
       id: v4(),
-      title: "Germany's Football Record National Champion",
+      title: 'Football',
       category: 'Sports ⚽',
       cards: [
         {
-          question: "Which professional team holds the record for most national title-wins in Germany's Bundesliga?",
-          answer: 'Bayern München - Bayer Munich',
+          question: "Is Bayern München Germany's Football Record Champion?",
+          isCorrect: true,
+          answer: 'Bayern München won the Bundesliga 27 times.',
         }
       ]
     }

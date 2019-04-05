@@ -9,6 +9,7 @@ import AddDecksScreen from '../screens/AddDecksScreen';
 import HomeView from '../screens/HomeView';
 import SingleDeckView from '../screens/SingleDeckView';
 import AddNewCardView from '../screens/AddNewCardView';
+import QuizView from '../screens/QuizView';
 
 const NavStack = createStackNavigator({
   Home: {
@@ -19,6 +20,9 @@ const NavStack = createStackNavigator({
   },
   AddNewCard: {
     screen: AddNewCardView
+  },
+  Quiz: {
+    screen: QuizView
   }
 });
 
