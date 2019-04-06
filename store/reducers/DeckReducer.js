@@ -29,13 +29,18 @@ const initialState = {
     },
     {
       id: v4(),
-      title: 'Football',
+      title: 'Football in Germany',
       category: 'Sports ⚽',
       cards: [
         {
           question: "Is Bayern München Germany's Football Record Champion?",
           isCorrect: true,
           answer: 'Bayern München won the Bundesliga 27 times.',
+        },
+        {
+          question: "The German Bundesliga consists of 20 different professional teams.",
+          isCorrect: false,
+          answer: 'The Bundesliga is made up of 18 different teams.',
         }
       ]
     }
