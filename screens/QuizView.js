@@ -12,6 +12,7 @@ class QuizView extends React.Component {
     deck: undefined,
     quizzes: [],
     quizIndex: 0,
+    displayAnswer: false,
     currentScore: 0,
     quizOver: false
   }
@@ -22,6 +23,8 @@ class QuizView extends React.Component {
     const currentDeck = this.props.decks.find((deck) => deck.id === deckId)
     const currentCard = this.props.decks.find((deck) => deck.id === deckId).cards[this.state.quizIndex]
 
+    this.setState({ displayAnswer: true })
+
     // Handle correct / incorrect answer
     if (answer === 'correct' && currentCard.isCorrect === true) {
       this.setState({ currentScore: this.state.currentScore + 1 })
@@ -31,14 +34,19 @@ class QuizView extends React.Component {
       this.setState({ currentScore: this.state.currentScore + 1 })
     }
 
-    // Handle quizIndex update
-    this.setState({ quizIndex: this.state.quizIndex + 1 })
-
     // Handle Quiz is over
-    console.log('Current index:', this.state.quizIndex, 'How many cards?:', currentDeck.cards.length)
     if (this.state.quizIndex + 1 === currentDeck.cards.length) {
       this.setState({ quizOver: true })
     }
+  }
+
+  handleNextButtonPress() {
+    // Handle quizIndex update
+    this.setState({ quizIndex: this.state.quizIndex + 1, displayAnswer: false })
+  }
+
+  handleHomeButtonPress() {
+    this.props.navigation.navigate('Home')
   }
 
   componentWillMount() {
@@ -87,16 +95,107 @@ class QuizView extends React.Component {
     })
     this.setState({ deckId, deck, quizzes })
   }
-  
+
+  cardQuestion(card, index) {
+    return(
+      <Card style={styles.deckCard}>
+        <Badge style={styles.countBlob}>
+          <Text>Card {this.state.quizIndex + 1}</Text>
+        </Badge>
+        <View style={styles.questionWrapper}>
+          <Text style={styles.question}>Q: {card.question}</Text>
+        </View>
+        <View style={styles.buttonWrap}>
+          <Button
+            onPress={this.handleButtonPress.bind(this, 'correct')}
+            style={styles.correctButton}>
+            <Text style={styles.correctButtonText}>
+              Correct
+              <Icon.Entypo
+                name='check'
+                size={18}
+                style={styles.correctIcon}
+              />
+              </Text>
+          </Button>
+          <Button
+            onPress={this.handleButtonPress.bind(this, 'incorrect')}
+            style={styles.incorrectButton}>
+            <Text style={styles.incorrectButtonText}>
+              Incorrect
+              <Icon.Entypo
+                name='cross'
+                size={18}
+                style={styles.incorrectIcon}
+              />
+            </Text>
+          </Button>
+        </View>
+      </Card>
+    )
+  }
+
+  cardAnswer(card, index) {
+    return(
+      <Card style={styles.deckCard}>
+        <Badge style={styles.countBlob}>
+          <Text>Card {this.state.quizIndex + 1}</Text>
+        </Badge>
+        <View style={styles.questionWrapper}>
+          <Text style={styles.question}>A: {card.answer}</Text>
+        </View>
+        <View style={styles.buttonWrap}>
+          {this.renderAnswerButton()}
+        </View>
+      </Card>
+    )
+  }
+
+  renderAnswerButton() {
+    if (this.state.quizOver) {
+      return(
+        <Button
+          onPress={this.handleHomeButtonPress.bind(this)}
+          style={styles.nextButton}>
+          <Text style={styles.nextButtonText}>
+            Home
+            <Icon.Entypo
+              name='home'
+              size={18}
+              style={styles.nextIcon}
+            />
+          </Text>
+        </Button>
+      )
+    }
+    return(
+      <Button
+        onPress={this.handleNextButtonPress.bind(this)}
+        style={styles.nextButton}>
+        <Text style={styles.nextButtonText}>
+          Next Card
+          <Icon.Entypo
+            name='controller-next'
+            size={18}
+            style={styles.nextIcon}
+          />
+          </Text>
+      </Button>
+    )
+  }
 
   render() {
+    const deckId = this.props.navigation.getParam('deckId')
+    const deck = this.props.decks.find((deck) => deck.id === deckId)
+    const currentCard = this.props.decks.find((deck) => deck.id === deckId).cards[this.state.quizIndex]
+
     if (!this.state.deckId || !this.state.deck) {
       return null
     }
 
     return (
       <View>
-        {this.state.quizzes[this.state.quizIndex]}
+        { this.state.displayAnswer ? this.cardAnswer(currentCard) : this.cardQuestion(currentCard) }
         <View style={styles.pointsWrapper}>
           <Text style={styles.title}>{this.state.quizOver ? 'You scored:' : 'Your current score:'}</Text>
           <Text style={styles.pointsCount}>
@@ -168,6 +267,21 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   incorrectIcon: {
+    marginLeft: 6,
+    color: 'white',
+  },
+  nextButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: 150,
+    backgroundColor: 'blue',
+  },
+  nextButtonText: {
+    textTransform: 'uppercase',
+    color: 'white',
+  },
+  nextIcon: {
     marginLeft: 6,
     color: 'white',
   },
