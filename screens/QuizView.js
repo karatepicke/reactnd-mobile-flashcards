@@ -98,9 +98,11 @@ class QuizView extends React.Component {
       <View>
         {this.state.quizzes[this.state.quizIndex]}
         <View style={styles.pointsWrapper}>
-            <Text style={styles.title}>{this.state.quizOver ? 'You scored:' : 'Your current score:'}</Text>
-            <Text style={styles.pointsCount}>{this.state.currentScore} Points</Text>
-            <Text style={styles.quizResultEmoji}>{this.state.quizOver ? '🎉' : ''}</Text>
+          <Text style={styles.title}>{this.state.quizOver ? 'You scored:' : 'Your current score:'}</Text>
+          <Text style={styles.pointsCount}>
+            {this.state.quizOver ? `${this.state.currentScore} / ${this.state.deck.cards.length} Points` : `${this.state.currentScore} Points`}
+          </Text>
+          <Text style={styles.quizResultEmoji}>{this.state.quizOver ? '🎉' : ''}</Text>
         </View>
       </View>
     )
