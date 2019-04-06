@@ -35,7 +35,7 @@ const initialState = {
         {
           question: "Is Bayern München Germany's Football Record Champion?",
           isCorrect: true,
-          answer: 'Bayern München won the Bundesliga 27 times.',
+          answer: 'They are. Bayern München won the Bundesliga 28 times.',
         },
         {
           question: "The German Bundesliga consists of 20 different professional teams.",
