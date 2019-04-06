@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // UI
 import { View, Text, StyleSheet } from 'react-native';
-import { Card, Button, Badge } from 'native-base';
+import { Card, Button, Badge, Container } from 'native-base';
 import { Icon } from 'expo';
 
 class QuizView extends React.Component {
@@ -11,13 +11,16 @@ class QuizView extends React.Component {
     deckId: undefined,
     deck: undefined,
     quizzes: [],
-    quizIndex: 0
+    quizIndex: 0,
+    currentScore: 0
   }
 
   // Event Handlers
   handleButtonPress(answer) {
-    // Handle correct / Incorrect
-    // do sth with answer
+    // Handle correct / incorrect answer
+    if (answer === 'correct' && this.state.quizzes[this.state.quizIndex].isCorrect === true) {
+      this.setState({ currentScore: this.state.currentScore + 1 })
+    }
 
     // Handle quizIndex update
     this.setState({ quizIndex: this.state.quizIndex + 1 })
@@ -34,7 +37,9 @@ class QuizView extends React.Component {
             <Badge style={styles.countBlob}>
               <Text>Card {index + 1}</Text>
             </Badge>
-            <Text style={styles.question}>Q: {card.question}</Text>
+            <View style={styles.questionWrapper}>
+              <Text style={styles.question}>Q: {card.question}</Text>
+            </View>
             <View style={styles.buttonWrap}>
               <Button
                 onPress={this.handleButtonPress.bind(this, 'correct')}
@@ -74,7 +79,15 @@ class QuizView extends React.Component {
       return null
     }
 
-    return this.state.quizzes[this.state.quizIndex]
+    return (
+      <View>
+        {this.state.quizzes[this.state.quizIndex]}
+        <View style={styles.pointsWrapper}>
+            <Text style={styles.title}>Your current score:</Text>
+            <Text style={styles.pointsCount}>{this.state.currentScore} Points</Text>
+        </View>
+      </View>
+    )
   }
 }
 
@@ -85,7 +98,7 @@ export default connect(mapStateToProps)(QuizView);
 
 const styles = StyleSheet.create({
   deckCard: {
-    height: 200,
+    height: 230,
     padding: 15,
     backgroundColor: '#dee2e8',
   },
@@ -93,8 +106,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#db8325',
     marginBottom: 10,
   },
+  questionWrapper: {
+    height: 100,
+  },
   question: {
     marginBottom: 50,
+    textAlign: 'center',
+    fontSize: 18,
   },
   buttonWrap: {
     display: 'flex',
@@ -134,5 +152,18 @@ const styles = StyleSheet.create({
   incorrectIcon: {
     marginLeft: 6,
     color: 'white',
+  },
+  pointsWrapper: {
+    marginTop: 15,
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 22,
+    fontStyle: 'italic',
+  },
+  pointsCount: {
+    textAlign: 'center',
+    fontSize: 20,
   }
 });
