@@ -12,18 +12,33 @@ class QuizView extends React.Component {
     deck: undefined,
     quizzes: [],
     quizIndex: 0,
-    currentScore: 0
+    currentScore: 0,
+    quizOver: false
   }
 
   // Event Handlers
   handleButtonPress(answer) {
+    const deckId = this.state.deckId
+    const currentDeck = this.props.decks.find((deck) => deck.id === deckId)
+    const currentCard = this.props.decks.find((deck) => deck.id === deckId).cards[this.state.quizIndex]
+
     // Handle correct / incorrect answer
-    if (answer === 'correct' && this.state.quizzes[this.state.quizIndex].isCorrect === true) {
+    if (answer === 'correct' && currentCard.isCorrect === true) {
+      this.setState({ currentScore: this.state.currentScore + 1 })
+    }
+
+    if (answer === 'incorrect' && currentCard.isCorrect === false) {
       this.setState({ currentScore: this.state.currentScore + 1 })
     }
 
     // Handle quizIndex update
     this.setState({ quizIndex: this.state.quizIndex + 1 })
+
+    // Handle Quiz is over
+    console.log('Current index:', this.state.quizIndex, 'How many cards?:', currentDeck.cards.length)
+    if (this.state.quizIndex + 1 === currentDeck.cards.length) {
+      this.setState({ quizOver: true })
+    }
   }
 
   componentWillMount() {
@@ -83,8 +98,9 @@ class QuizView extends React.Component {
       <View>
         {this.state.quizzes[this.state.quizIndex]}
         <View style={styles.pointsWrapper}>
-            <Text style={styles.title}>Your current score:</Text>
+            <Text style={styles.title}>{this.state.quizOver ? 'You scored:' : 'Your current score:'}</Text>
             <Text style={styles.pointsCount}>{this.state.currentScore} Points</Text>
+            <Text style={styles.quizResultEmoji}>{this.state.quizOver ? '🎉' : ''}</Text>
         </View>
       </View>
     )
@@ -163,7 +179,12 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   pointsCount: {
+    marginBottom: 20,
     textAlign: 'center',
     fontSize: 20,
+  },
+  quizResultEmoji: {
+    textAlign: 'center',
+    fontSize: 80,
   }
 });
