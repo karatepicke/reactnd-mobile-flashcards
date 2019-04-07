@@ -18,12 +18,12 @@ const initialState = {
         {
           question: 'Is the New Zealand "Kakapo" close to extinction?',
           isCorrect: true,
-          answer: 'Correct. Thats because it shows no natural flight response and relies solely on its green feathers to camouflage it. Unfortunately that does not help against predators that track its prey by scent.',
+          answer: 'It is. Thats because it shows no natural flight response and relies solely on its green feathers to camouflage it. Unfortunately that does not help against predators that track its prey by scent.',
         },
         {
           question: 'Can we help?',
           isCorrect: true,
-          answer: 'Correct. For example by donating to the New Zealand Kakapo Recovery Fund.',
+          answer: 'Yes, for example by donating to the New Zealand Kakapo Recovery Fund.',
         }
       ]
     },
