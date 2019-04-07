@@ -2,7 +2,7 @@
 
 This is my version of the "Mobile Flashcards"-project for Udacity's React-Redux course. The project is written in React Native (js/jsx), CSS and HTML and implements the third-party-libraray Redux for state-management. It utilizes the "Semantic UI" - Library for UI-elements.
 
-The project has been created with `create-react-app`.
+The project has been created with `create-react-native-app`.
 
 ## Setting up and starting
 
@@ -19,7 +19,6 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
