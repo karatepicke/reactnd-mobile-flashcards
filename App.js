@@ -8,14 +8,26 @@ import configureStore from './store/configureStore';
 // UI
 import { View } from 'react-native';
 
+// Helpers
+import { setLocalNotification } from './utils/helpers';
+
+
 const store = configureStore();
 
-const App = () => (
-  <Provider store={store}>
-    <View style={{ flex: 1 }}>
-      <AppNavigator />
-    </View>
-  </Provider>
-);
+class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
+  render() {
+    return(
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <AppNavigator />
+        </View>
+      </Provider>
+    )
+  }
+}
 
 export default App;
