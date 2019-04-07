@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Button, Badge, Container } from 'native-base';
 import { Icon } from 'expo';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 class QuizView extends React.Component {
   state = {
@@ -46,6 +47,8 @@ class QuizView extends React.Component {
   }
 
   handleHomeButtonPress() {
+    clearLocalNotification()
+      .then(setLocalNotification)
     this.props.navigation.navigate('Home')
   }
 
