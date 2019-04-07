@@ -4,6 +4,13 @@ This is my version of the "Mobile Flashcards"-project for Udacity's React-Redux 
 
 The project has been created with `create-react-native-app`.
 
+## Developer Software Dependencies:
+
+Node package manager (NPM)
+create-react-native-app
+Expo app on a mobile device, and/or Xcode (for the iOS simulator)
+Expo SDK or XDE
+
 ## Setting up and starting
 
 To get started working on the project right away:
