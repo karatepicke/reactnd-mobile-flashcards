@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 
 // UI
 import { View, TextInput, Text, Alert, StyleSheet } from 'react-native';
-import { Container, Card, Form, Button } from 'native-base';
+import { Container, Form, Button } from 'native-base';
 
 // Actions
 import { addNewDeck } from '../store/actions/Deck';
@@ -21,7 +21,7 @@ class DeckForm extends React.Component {
   handleButtonPress() {
     if (!this.state.title || !this.state.category) {
       Alert.alert(
-        'ALARM',
+        'Achtung',
         this.getAlertMsg(),
         [
           { text: 'OK', onPress: () => console.log('OK Pressed') },
@@ -35,6 +35,7 @@ class DeckForm extends React.Component {
         category: this.state.category,
         cards: []
       }))
+      // this.setState({ title: '', category: '' })
       this.props.navigation.navigate('Home')
     }
   }
@@ -58,6 +59,7 @@ class DeckForm extends React.Component {
           <Form>
             <TextInput
               onChangeText={title => this.setState({ title })}
+              value={this.state.title}
               fieldLabel='Deck-Title'
               placeholder='I.e. "My nifty biology-deck"'
               maxLength={50}
@@ -65,6 +67,7 @@ class DeckForm extends React.Component {
             />
             <TextInput
               onChangeText={category => this.setState({ category })}
+              value={this.state.category}
               fieldLabel='Deck-Category'
               placeholder='I.e. "Biology"'
               maxLength={50}
@@ -88,11 +91,11 @@ export default connect()(DeckForm);
 
 const styles = StyleSheet.create({
   textInput: {
+    // height: 20,
     marginBottom: 10,
     padding: 16,
     backgroundColor: 'white',
     borderRadius: 5,
-    fontSize: 15,
   },
   buttonWrapper: {
     display: 'flex',

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Navigation
-import { createStackNavigator } from 'react-navigation';
 
 // Actions
 import { _getInitialDeckData } from '../data/_DATA';
@@ -10,7 +9,6 @@ import { _getInitialDeckData } from '../data/_DATA';
 // UI
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card } from 'native-base';
-import FlashcardsHeader from '../components/Header';
 
 class HomeView extends React.Component {
   state = {
@@ -39,7 +37,6 @@ class HomeView extends React.Component {
         </View>
       )
     })
-    // return <FlashcardsHeader />
     return decksPanels
   }
 }

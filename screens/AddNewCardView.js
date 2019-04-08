@@ -66,7 +66,7 @@ class AddNewCardView extends React.Component {
               <Picker.Item label="Incorrect" value={false} />
             </Picker>
             <View style={styles.buttonWrapper}>
-              <Button 
+              <Button
                 style={styles.addCardButton}
                 onPress={this.handleButtonPress.bind(this)}>
                 <Text style={styles.addCardButtonText}>Submit Card</Text>
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 10,
     textAlign: 'center',
-    // textDecoration: 'underline',
     fontSize: 20,
   },
   textInput: {

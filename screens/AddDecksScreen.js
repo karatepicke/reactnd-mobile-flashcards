@@ -1,14 +1,9 @@
 import React from 'react';
-import { WebBrowser } from 'expo';
 
 // UI
 import {
-  Image,
-  Platform,
-  ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { Card } from 'native-base';
@@ -19,7 +14,7 @@ import DeckForm from '../components/DeckForm';
 
 export default class AddDecksScreen extends React.Component {
   render() {
-    return ( 
+    return (
       <View>
         <Card style={styles.deckCard}>
           <Text style={styles.title}>New Deck</Text>

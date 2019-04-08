@@ -77,7 +77,7 @@ class QuizView extends React.Component {
                     size={18}
                     style={styles.correctIcon}
                   />
-                  </Text>
+                </Text>
               </Button>
               <Button
                 onPress={this.handleButtonPress.bind(this, 'incorrect')}
@@ -100,7 +100,7 @@ class QuizView extends React.Component {
   }
 
   cardQuestion(card, index) {
-    return(
+    return (
       <Card style={styles.deckCard}>
         <Badge style={styles.countBlob}>
           <Text>Card {this.state.quizIndex + 1}</Text>
@@ -119,7 +119,7 @@ class QuizView extends React.Component {
                 size={18}
                 style={styles.correctIcon}
               />
-              </Text>
+            </Text>
           </Button>
           <Button
             onPress={this.handleButtonPress.bind(this, 'incorrect')}
@@ -139,7 +139,7 @@ class QuizView extends React.Component {
   }
 
   cardAnswer(card, index) {
-    return(
+    return (
       <Card style={styles.deckCard}>
         <Badge style={styles.countBlob}>
           <Text>Card {this.state.quizIndex + 1}</Text>
@@ -156,7 +156,7 @@ class QuizView extends React.Component {
 
   renderAnswerButton() {
     if (this.state.quizOver) {
-      return(
+      return (
         <Button
           onPress={this.handleHomeButtonPress.bind(this)}
           style={styles.nextButton}>
@@ -165,13 +165,13 @@ class QuizView extends React.Component {
             <Icon.Entypo
               name='home'
               size={18}
-              style={styles.nextIcon}
+              style={styles.homeIcon}
             />
           </Text>
         </Button>
       )
     }
-    return(
+    return (
       <Button
         onPress={this.handleNextButtonPress.bind(this)}
         style={styles.nextButton}>
@@ -182,14 +182,13 @@ class QuizView extends React.Component {
             size={18}
             style={styles.nextIcon}
           />
-          </Text>
+        </Text>
       </Button>
     )
   }
 
   render() {
     const deckId = this.props.navigation.getParam('deckId')
-    const deck = this.props.decks.find((deck) => deck.id === deckId)
     const currentCard = this.props.decks.find((deck) => deck.id === deckId).cards[this.state.quizIndex]
 
     if (!this.state.deckId || !this.state.deck) {
@@ -198,7 +197,7 @@ class QuizView extends React.Component {
 
     return (
       <View>
-        { this.state.displayAnswer ? this.cardAnswer(currentCard) : this.cardQuestion(currentCard) }
+        {this.state.displayAnswer ? this.cardAnswer(currentCard) : this.cardQuestion(currentCard)}
         <View style={styles.pointsWrapper}>
           <Text style={styles.title}>{this.state.quizOver ? 'You scored:' : 'Your current score:'}</Text>
           <Text style={styles.pointsCount}>
@@ -253,7 +252,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   correctIcon: {
-    marginLeft: 6,
+    marginLeft: 8,
   },
   incorrectButton: {
     display: 'flex',
@@ -270,7 +269,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   incorrectIcon: {
-    marginLeft: 6,
+    marginLeft: 8,
     color: 'white',
   },
   nextButton: {
@@ -285,7 +284,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   nextIcon: {
-    marginLeft: 6,
+    marginLeft: 8,
+    color: 'white',
+  },
+  homeIcon: {
+    marginLeft: 8,
     color: 'white',
   },
   pointsWrapper: {
