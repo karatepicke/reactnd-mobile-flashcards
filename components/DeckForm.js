@@ -35,7 +35,7 @@ class DeckForm extends React.Component {
         category: this.state.category,
         cards: []
       }))
-      // this.setState({ title: '', category: '' })
+      this.setState({ title: '', category: '' })
       this.props.navigation.navigate('Home')
     }
   }
@@ -57,22 +57,24 @@ class DeckForm extends React.Component {
       <View>
         <Container>
           <Form>
-            <TextInput
-              onChangeText={title => this.setState({ title })}
-              value={this.state.title}
-              fieldLabel='Deck-Title'
-              placeholder='I.e. "My nifty biology-deck"'
-              maxLength={50}
-              style={styles.textInput}
-            />
-            <TextInput
-              onChangeText={category => this.setState({ category })}
-              value={this.state.category}
-              fieldLabel='Deck-Category'
-              placeholder='I.e. "Biology"'
-              maxLength={50}
-              style={styles.textInput}
-            />
+            <View style={styles.inputWrapper}>
+              <TextInput
+                onChangeText={title => this.setState({ title })}
+                value={this.state.title}
+                fieldLabel='Deck-Title'
+                placeholder='I.e. "My nifty biology-deck"'
+                maxLength={50}
+                style={styles.textInput}
+              />
+              <TextInput
+                onChangeText={category => this.setState({ category })}
+                value={this.state.category}
+                fieldLabel='Deck-Category'
+                placeholder='I.e. "Biology"'
+                maxLength={50}
+                style={styles.textInput}
+              />
+            </View>
             <View style={styles.buttonWrapper}>
               <Button
                 style={styles.addDeckButton}
@@ -90,10 +92,13 @@ class DeckForm extends React.Component {
 export default connect()(DeckForm);
 
 const styles = StyleSheet.create({
+  inputWrapper: {
+    // marginBottom: 10,
+  },
   textInput: {
-    // height: 20,
+    height: 30,
+    paddingLeft: 10,
     marginBottom: 10,
-    padding: 16,
     backgroundColor: 'white',
     borderRadius: 5,
   },
@@ -103,6 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addDeckButton: {
+    marginTop: 85,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
